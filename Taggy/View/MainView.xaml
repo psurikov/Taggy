@@ -1,0 +1,49 @@
+﻿<Window x:Class="Taggy.View.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:view="clr-namespace:Taggy.View"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="Taggy"
+        Height="768"
+        Width="1024">
+    <view:LayoutPanel Orientation="Vertical" Interval="0">
+        <view:LayoutPanel>
+            <Label Content="Select a directory with files that you want to browse:" Style="{StaticResource DescriptionLabel}"></Label>
+        </view:LayoutPanel>
+        <view:LayoutPanel Orientation="Horizontal">
+            <Label Content="Location:" VerticalAlignment="Center" Style="{StaticResource DescriptionLabel}"></Label>
+            <TextBox view:LayoutPanel.LayoutMode="Stretch" VerticalAlignment="Center"></TextBox>
+            <Button Content="Browse" Style="{StaticResource BrowseButton}" VerticalAlignment="Center"></Button>
+        </view:LayoutPanel>
+        <Grid view:LayoutPanel.LayoutMode="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <GridSplitter Grid.Column="1" Grid.Row="0" Width="{StaticResource SplitterWidth}" HorizontalAlignment="Stretch" Background="{StaticResource SplitterBackground}"></GridSplitter>
+            <GroupBox Grid.Column="0" Grid.Row="0">
+                <GroupBox.Header>
+                    <Label Content="Tags" Style="{StaticResource DescriptionLabel}"></Label>
+                </GroupBox.Header>
+                <GroupBox.Content>
+                    <Border Background="DarkMagenta"></Border>
+                </GroupBox.Content>
+            </GroupBox>
+            <GroupBox Grid.Column="2" Grid.Row="0">
+                <GroupBox.Header>
+                    <Label Content="Files" Style="{StaticResource DescriptionLabel}"></Label>
+                </GroupBox.Header>
+                <GroupBox.Content>
+                    <Border Background="Crimson"></Border>
+                </GroupBox.Content>
+            </GroupBox>
+        </Grid>
+    </view:LayoutPanel>
+</Window>
