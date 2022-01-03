@@ -9,7 +9,7 @@ namespace Taggy.Model
     /// <summary>
     /// File reference that includes various descriptive attributes.
     /// </summary>
-    internal class FileReference
+    public class FileReference
     {
         private string filePath = "";
         private TagCluster tagCluster = new TagCluster();

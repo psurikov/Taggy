@@ -7,7 +7,7 @@
     <Application.Resources>
         <sys:Double x:Key="SplitterWidth">3</sys:Double>
         <SolidColorBrush x:Key="SplitterBackground" Color="#FF7B7B7B"></SolidColorBrush>
-        <Style x:Key="BrowseButton" TargetType="Button">
+        <Style x:Key="OperationButton" TargetType="Button">
             <Setter Property="Padding" Value="5,3,5,3"></Setter>
         </Style>
         <Style x:Key="DescriptionLabel" TargetType="Label">

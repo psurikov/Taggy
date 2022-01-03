@@ -15,8 +15,9 @@
         </view:LayoutPanel>
         <view:LayoutPanel Orientation="Horizontal">
             <Label Content="Location:" VerticalAlignment="Center" Style="{StaticResource DescriptionLabel}"></Label>
-            <TextBox view:LayoutPanel.LayoutMode="Stretch" VerticalAlignment="Center"></TextBox>
-            <Button Content="Browse" Style="{StaticResource BrowseButton}" VerticalAlignment="Center"></Button>
+            <TextBox view:LayoutPanel.LayoutMode="Stretch" VerticalAlignment="Center" Text="{Binding Location}"></TextBox>
+            <Button Content="Browse" Style="{StaticResource OperationButton}" VerticalAlignment="Center"></Button>
+            <Button Content="Reindex" Style="{StaticResource OperationButton}" VerticalAlignment="Center" Click="OnReindex"></Button>
         </view:LayoutPanel>
         <Grid view:LayoutPanel.LayoutMode="Stretch">
             <Grid.RowDefinitions>
@@ -41,7 +42,13 @@
                     <Label Content="Files" Style="{StaticResource DescriptionLabel}"></Label>
                 </GroupBox.Header>
                 <GroupBox.Content>
-                    <Border Background="Crimson"></Border>
+                    <Border Background="Crimson">
+                        <DataGrid ItemsSource="{Binding FileReferencesForSelectedTag}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding FilePath}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
                 </GroupBox.Content>
             </GroupBox>
         </Grid>

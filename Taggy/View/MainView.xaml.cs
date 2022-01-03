@@ -26,5 +26,22 @@ namespace Taggy.View
             InitializeComponent();
             DataContext = new MainViewModel();
         }
+
+        public void Browse()
+        {
+            // create folder browser dialog
+        }
+
+        public void Reindex()
+        {
+            var dataContext = DataContext as MainViewModel;
+            if (dataContext != null)
+                dataContext.Reindex();
+        }
+
+        private void OnReindex(object sender, RoutedEventArgs e)
+        {
+            Reindex();
+        }
     }
 }
