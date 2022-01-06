@@ -14,18 +14,24 @@ namespace Taggy.Model
 
         public Tag? GetTagByName(string name)
         {
-            var item = items.FirstOrDefault(tag => tag.Name == name);
-            if (item == null)
+            var matching = items.Where(tag => tag.Name == name);
+            if (matching.Any() == false)
                 return null;
-            return item;
+            return matching.First();
         }
 
         public Tag? GetTagByValue(string value)
         {
-            var item = items.First(tag => tag.Value == value);
-            if (item == null)
+            var matching = items.Where(tag => tag.Value == value);
+            if (matching.Any() == false)
                 return null;
-            return item;
+            return matching.First();
+        }
+
+        public override string ToString()
+        {
+            var stringRepresentation = string.Join(", ", items);
+            return stringRepresentation;
         }
     }
 }

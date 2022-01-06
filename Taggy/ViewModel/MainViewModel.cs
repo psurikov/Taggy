@@ -25,7 +25,7 @@ namespace Taggy.ViewModel
 
         public MainViewModel()
         {
-
+            Location = "S:\\Books";
         }
 
         #endregion
@@ -101,6 +101,10 @@ namespace Taggy.ViewModel
         {
             var fileReferences = FileReferenceBrowser.Browse(Location);
             this.FileReferences = new ObservableCollection<FileReference>(fileReferences);
+
+            var concatenatedTags = fileReferences.SelectMany(f => f.TagCluster.Items);
+            var distinctTags = concatenatedTags.Distinct().OrderBy(t => t.Name + "#" + t.Value);
+            Tags = new ObservableCollection<Tag>(distinctTags);
         }
 
         #endregion

@@ -17,7 +17,7 @@ namespace Taggy.Tests.Model
         [TestMethod]
         public void Parse_Items()
         {
-            var tags = TagParser.Parse("name (author=roger, year=1986, tags=biology,mathematics)");
+            var tags = TagParser.Parse("name @(author=roger, year=1986, biology, mathematics)");
             Assert.IsTrue(tags.GetTagByName("author")?.Value == "roger");
             Assert.IsTrue(tags.GetTagByName("year")?.Value == "1986");
             Assert.IsTrue(tags.GetTagByValue("biology") != null);

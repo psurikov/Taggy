@@ -34,7 +34,14 @@
                     <Label Content="Tags" Style="{StaticResource DescriptionLabel}"></Label>
                 </GroupBox.Header>
                 <GroupBox.Content>
-                    <Border Background="DarkMagenta"></Border>
+                    <Border Background="DarkMagenta">
+                        <DataGrid ItemsSource="{Binding Tags}" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Name}" Header="Name"></DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Value}" Header="Value"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
                 </GroupBox.Content>
             </GroupBox>
             <GroupBox Grid.Column="2" Grid.Row="0">
@@ -43,9 +50,10 @@
                 </GroupBox.Header>
                 <GroupBox.Content>
                     <Border Background="Crimson">
-                        <DataGrid ItemsSource="{Binding FileReferencesForSelectedTag}">
+                        <DataGrid ItemsSource="{Binding FileReferencesForSelectedTag}" AutoGenerateColumns="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding FilePath}"/>
+                                <DataGridTextColumn Binding="{Binding FilePath}" Header="File location"/>
+                                <DataGridTextColumn Binding="{Binding TagCluster}" Header="Tags"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Border>

@@ -7,7 +7,7 @@ namespace Taggy.Model
     {
         public static TagCluster Parse(string fileName)
         {
-            var regex = "\\((?<tags>.*)\\)";
+            var regex = "@\\((?<tags>.*)\\)";
             var match = Regex.Match(fileName, regex);
             if (match.Success)
             {
@@ -16,31 +16,17 @@ namespace Taggy.Model
                 var tagsPairList = tagsGroup.Split(',').Where(p => !string.IsNullOrEmpty(p));
                 foreach (var tagsPair in tagsPairList)
                 {
-                    var nameValue = tagsPair.Split('=').Where(p => !string.IsNullOrEmpty(p)).ToList();
-                    if (nameValue.Count > 1)
+                    var index = tagsPair.IndexOf('=');
+                    if (index >= 0)
                     {
-                        var name = nameValue[0].Trim();
-                        var value = nameValue[1].Trim();
-                        
-                        // handling special case for "Tags"
-                        if (name.ToLower() == "tags")
-                        {
-                            var innerValues = value.Split(',').Where(v => !string.IsNullOrEmpty(v)).ToList();
-                            foreach (var innerValue in innerValues)
-                            {
-                                var tag = new Tag(name, innerValue.Trim());
-                                tags.Items.Add(tag);
-                            }
-                        }
-                        else
-                        {
-                            var tag = new Tag(name, value);
-                            tags.Items.Add(tag);
-                        }
+                        var name = tagsPair.Substring(0, index).Trim();
+                        var value = tagsPair.Substring(index + 1).Trim();
+                        var tag = new Tag(name, value);
+                        tags.Items.Add(tag);
                     }
-                    if (nameValue.Count > 0)
+                    else
                     {
-                        var value = nameValue[0];
+                        var value = tagsPair.Trim();
                         var tag = new Tag(value);
                         tags.Items.Add(tag);
                     }
