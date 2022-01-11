@@ -1,0 +1,1 @@
+﻿- colorize tags part in text in columns

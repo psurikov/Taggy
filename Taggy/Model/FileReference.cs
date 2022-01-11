@@ -26,6 +26,21 @@ namespace Taggy.Model
             set { filePath = value; }
         }
 
+        public string FilePathUntagged
+        {
+            get
+            {
+                var atIndex = filePath.IndexOf('@');
+                if (atIndex >= 0)
+                {
+                    var filePathUntagged = filePath.Substring(0, atIndex).TrimEnd();
+                    return filePathUntagged;
+                }
+
+                return filePath;
+            }
+        }
+
         public TagCluster TagCluster 
         {
             get { return tagCluster; }

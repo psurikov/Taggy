@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Taggy.Model;
 
 namespace Taggy.ViewModel
@@ -16,6 +12,7 @@ namespace Taggy.ViewModel
         private string location;
         private ObservableCollection<Tag> tags = new ObservableCollection<Tag>();
         private Tag selectedTag;
+        private TagCloudViewModel tagCloud = new TagCloudViewModel();
         private ObservableCollection<FileReference> fileReferences = new ObservableCollection<FileReference>();        
         private ObservableCollection<FileReference> fileReferencesForSelectedTag = new ObservableCollection<FileReference>();
 
@@ -68,6 +65,18 @@ namespace Taggy.ViewModel
             }
         }
 
+        public TagCloudViewModel TagCloud
+        {
+            get { return tagCloud; }
+            set
+            {
+                if (tagCloud == value)
+                    return;
+                tagCloud = value;
+                OnPropertyChanged(nameof(TagCloud));
+            }
+        }
+
         public ObservableCollection<FileReference> FileReferences
         {
             get { return fileReferences; }
@@ -105,6 +114,13 @@ namespace Taggy.ViewModel
             var concatenatedTags = fileReferences.SelectMany(f => f.TagCluster.Items);
             var distinctTags = concatenatedTags.Distinct().OrderBy(t => t.Name + "#" + t.Value);
             Tags = new ObservableCollection<Tag>(distinctTags);
+            foreach(var tag in tags)
+            {
+                var tagCloudItem = new TagCloudItemViewModel();
+                tagCloudItem.Tag = tag;
+                tagCloudItem.Weight = concatenatedTags.Count(t => t == tag);
+                tagCloud.Items.Add(tagCloudItem);
+            }
         }
 
         #endregion

@@ -5,14 +5,21 @@
              xmlns:local="clr-namespace:Taggy"
              StartupUri="View\MainView.xaml">
     <Application.Resources>
-        <sys:Double x:Key="SplitterWidth">3</sys:Double>
-        <SolidColorBrush x:Key="SplitterBackground" Color="#FF7B7B7B"></SolidColorBrush>
-        <Style x:Key="OperationButton" TargetType="Button">
-            <Setter Property="Padding" Value="5,3,5,3"></Setter>
-        </Style>
-        <Style x:Key="DescriptionLabel" TargetType="Label">
-            <Setter Property="Padding" Value="0"></Setter>
-            <Setter Property="Margin" Value="0"></Setter>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="DataGridStyles.xaml"></ResourceDictionary>
+                <ResourceDictionary>
+                    <sys:Double x:Key="SplitterWidth">3</sys:Double>
+                    <SolidColorBrush x:Key="SplitterBackground" Color="#FFF2F2F2"></SolidColorBrush>
+                    <Style x:Key="OperationButton" TargetType="Button">
+                        <Setter Property="Padding" Value="5,3,5,3"></Setter>
+                    </Style>
+                    <Style x:Key="DescriptionLabel" TargetType="Label">
+                        <Setter Property="Padding" Value="0"></Setter>
+                        <Setter Property="Margin" Value="0"></Setter>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

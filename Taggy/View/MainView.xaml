@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:view="clr-namespace:Taggy.View"
         WindowStartupLocation="CenterScreen"
+        UseLayoutRounding="True"
         mc:Ignorable="d"
         Title="Taggy"
         Height="768"
@@ -34,14 +35,7 @@
                     <Label Content="Tags" Style="{StaticResource DescriptionLabel}"></Label>
                 </GroupBox.Header>
                 <GroupBox.Content>
-                    <Border Background="DarkMagenta">
-                        <DataGrid ItemsSource="{Binding Tags}" AutoGenerateColumns="False">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding Name}" Header="Name"></DataGridTextColumn>
-                                <DataGridTextColumn Binding="{Binding Value}" Header="Value"></DataGridTextColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Border>
+                    <view:TagCloudView DataContext="{Binding TagCloud}"/>
                 </GroupBox.Content>
             </GroupBox>
             <GroupBox Grid.Column="2" Grid.Row="0">
@@ -50,9 +44,9 @@
                 </GroupBox.Header>
                 <GroupBox.Content>
                     <Border Background="Crimson">
-                        <DataGrid ItemsSource="{Binding FileReferencesForSelectedTag}" AutoGenerateColumns="False">
+                        <DataGrid ItemsSource="{Binding FileReferencesForSelectedTag}" AutoGenerateColumns="False" Style="{StaticResource DataGridStyle}" RowHeaderWidth="0">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding FilePath}" Header="File location"/>
+                                <DataGridTextColumn Binding="{Binding FilePathUntagged}" Header="File location (removing tags)"/>
                                 <DataGridTextColumn Binding="{Binding TagCluster}" Header="Tags"/>
                             </DataGrid.Columns>
                         </DataGrid>
