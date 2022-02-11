@@ -7,6 +7,7 @@ namespace Taggy.ViewModel
     {
         private Tag tag;
         private int weight;
+        private bool isSelected;
 
         #region Constructors
 
@@ -40,6 +41,18 @@ namespace Taggy.ViewModel
                     return;
                 weight = value;
                 OnPropertyChanged(nameof(Weight));
+            }
+        }
+
+        public bool IsSelected
+        {
+            get { return isSelected; }
+            set
+            {
+                if (isSelected == value)
+                    return;
+                isSelected = value;
+                OnPropertyChanged(nameof(IsSelected));
             }
         }
 

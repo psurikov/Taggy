@@ -14,7 +14,7 @@ namespace Taggy.ViewModel
         private Tag selectedTag;
         private TagCloudViewModel tagCloud = new TagCloudViewModel();
         private ObservableCollection<FileReference> fileReferences = new ObservableCollection<FileReference>();        
-        private ObservableCollection<FileReference> fileReferencesForSelectedTag = new ObservableCollection<FileReference>();
+        private ObservableCollection<FileReference> fileReferencesForSelectedTags = new ObservableCollection<FileReference>();
 
         #endregion
 
@@ -90,15 +90,15 @@ namespace Taggy.ViewModel
             }
         }
 
-        public ObservableCollection<FileReference> FileReferencesForSelectedTag
+        public ObservableCollection<FileReference> FileReferencesForSelectedTags
         {
-            get { return fileReferencesForSelectedTag; }
+            get { return fileReferencesForSelectedTags; }
             set
             {
-                if (fileReferencesForSelectedTag == value)
+                if (fileReferencesForSelectedTags == value)
                     return;
-                fileReferencesForSelectedTag = value;
-                OnPropertyChanged(nameof(FileReferencesForSelectedTag));
+                fileReferencesForSelectedTags = value;
+                OnPropertyChanged(nameof(FileReferencesForSelectedTags));
             }
         }
 
@@ -129,7 +129,7 @@ namespace Taggy.ViewModel
 
         private void UpdateFileReferencesForSelectedTag()
         {
-            FileReferencesForSelectedTag = new ObservableCollection<FileReference>(FileReferences);
+            FileReferencesForSelectedTags = new ObservableCollection<FileReference>(FileReferences);
         }
 
         #endregion

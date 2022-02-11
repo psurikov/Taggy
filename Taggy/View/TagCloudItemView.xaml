@@ -9,6 +9,9 @@
     mc:Ignorable="d" 
     d:DesignHeight="100"
     d:DesignWidth="200">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisible"/>
+    </UserControl.Resources>
     <Grid>
         <Border BorderThickness="1" Background="#FFF1F1F1">
             <Border.BorderBrush>
@@ -22,5 +25,6 @@
                 <TextBlock Text="{Binding Weight}"></TextBlock>
             </StackPanel>
         </Border>
+        <Border BorderThickness="1" BorderBrush="Orange" Visibility="{Binding IsSelected, Converter={StaticResource BoolToVisible}}"/>
     </Grid>
 </UserControl>

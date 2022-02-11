@@ -44,9 +44,9 @@
                 </GroupBox.Header>
                 <GroupBox.Content>
                     <Border Background="Crimson">
-                        <DataGrid ItemsSource="{Binding FileReferencesForSelectedTag}" AutoGenerateColumns="False" Style="{StaticResource DataGridStyle}" RowHeaderWidth="0">
+                        <DataGrid ItemsSource="{Binding FileReferencesForSelectedTags}" AutoGenerateColumns="False" Style="{StaticResource DataGridStyle}" RowHeaderWidth="0">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding FilePathUntagged}" Header="File location (removing tags)"/>
+                                <DataGridTextColumn Binding="{Binding FilePathUntagged}" Header="File location (no tags)"/>
                                 <DataGridTextColumn Binding="{Binding TagCluster}" Header="Tags"/>
                             </DataGrid.Columns>
                         </DataGrid>
