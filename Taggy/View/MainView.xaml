@@ -30,7 +30,7 @@
                 <ColumnDefinition Width="2*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <GridSplitter Grid.Column="1" Grid.Row="0" Width="{StaticResource SplitterWidth}" HorizontalAlignment="Stretch" Background="{StaticResource SplitterBackground}"></GridSplitter>
-            <GroupBox Grid.Column="0" Grid.Row="0">
+            <GroupBox Grid.Column="0" Grid.Row="0" Style="{StaticResource GroupBoxStyle}">
                 <GroupBox.Header>
                     <Label Content="Tags" Style="{StaticResource DescriptionLabel}"></Label>
                 </GroupBox.Header>
@@ -38,7 +38,7 @@
                     <view:TagCloudView DataContext="{Binding TagCloud}"/>
                 </GroupBox.Content>
             </GroupBox>
-            <GroupBox Grid.Column="2" Grid.Row="0">
+            <GroupBox Grid.Column="2" Grid.Row="0" Style="{StaticResource GroupBoxStyle}">
                 <GroupBox.Header>
                     <Label Content="Files" Style="{StaticResource DescriptionLabel}"></Label>
                 </GroupBox.Header>

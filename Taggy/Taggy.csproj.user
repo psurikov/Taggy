@@ -13,6 +13,12 @@
     <Page Update="View\MainView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\Styles\GroupBoxStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Styles\OtherStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\TagCloudItemView.xaml">
       <SubType>Designer</SubType>
     </Page>

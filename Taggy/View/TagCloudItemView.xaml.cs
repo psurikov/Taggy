@@ -17,8 +17,7 @@ namespace Taggy.View
 
         private void TagCloudView_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var tagCloudItem = DataContext as TagCloudItemViewModel;
-            if (tagCloudItem != null)
+            if (DataContext is TagCloudItemViewModel tagCloudItem)
                 tagCloudItem.IsSelected = !tagCloudItem.IsSelected;
         }
     }
