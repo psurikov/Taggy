@@ -16,7 +16,7 @@ namespace Taggy.Model
             foreach (var file in files)
             {
                 var fileName = Path.GetFileName(file);
-                var tagCluster = TagParser.Parse(fileName);
+                var tagCluster = TagsConverter.FromString(fileName);
                 if (tagCluster != null && tagCluster.Items.Count > 0)
                     fileReferences.Add(new FileReference(file, tagCluster));                
             }

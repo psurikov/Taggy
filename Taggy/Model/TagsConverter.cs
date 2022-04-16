@@ -3,15 +3,15 @@ using System.Text.RegularExpressions;
 
 namespace Taggy.Model
 {
-    public class TagParser
+    public class TagsConverter
     {
-        public static TagCluster Parse(string fileName)
+        public static Tags FromString(string location)
         {
             var regex = "@\\((?<tags>.*)\\)";
-            var match = Regex.Match(fileName, regex);
+            var match = Regex.Match(location, regex);
             if (match.Success)
             {
-                var tags = new TagCluster();
+                var tags = new Tags();
                 var tagsGroup = match.Groups["tags"].Value;
                 var tagsPairList = tagsGroup.Split(',').Where(p => !string.IsNullOrEmpty(p));
                 foreach (var tagsPair in tagsPairList)
@@ -35,7 +35,19 @@ namespace Taggy.Model
                 return tags;
             }
             else
-                return new TagCluster();
+                return new Tags();
+        }
+
+        public static string ToString(Tags tags)
+        {
+            static string TagToString(Tag tag)
+            {
+                if (!string.IsNullOrWhiteSpace(tag.Name))
+                    return tag.Name + "=" + tag.Value;
+                return tag.Value;
+            }
+
+            return string.Format("@({0})", string.Join(",", tags.Items.Select(TagToString)));
         }
     }
 }

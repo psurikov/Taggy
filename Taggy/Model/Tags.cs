@@ -6,7 +6,7 @@ namespace Taggy.Model
     /// <summary>
     /// A cluster or set of tags.
     /// </summary>
-    public class TagCluster
+    public class Tags
     {
         private List<Tag> items = new List<Tag>();
 

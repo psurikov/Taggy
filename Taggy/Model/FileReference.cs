@@ -12,9 +12,9 @@ namespace Taggy.Model
     public class FileReference
     {
         private string filePath = "";
-        private TagCluster tagCluster = new TagCluster();
+        private Tags tagCluster = new Tags();
 
-        public FileReference(string filePath, TagCluster tags)
+        public FileReference(string filePath, Tags tags)
         {
             FilePath = filePath;
             TagCluster = tags;
@@ -41,7 +41,7 @@ namespace Taggy.Model
             }
         }
 
-        public TagCluster TagCluster 
+        public Tags TagCluster 
         {
             get { return tagCluster; }
             set { tagCluster = value; }
