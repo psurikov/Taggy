@@ -25,6 +25,22 @@ namespace Taggy.View
         {
             InitializeComponent();
             DataContext = new MainViewModel();
+            Loaded += OnLoaded;
+            Closing += OnClosing;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var viewModel = DataContext as MainViewModel;
+            if (viewModel != null)
+                viewModel.Load();
+        }
+
+        private void OnClosing(object? sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var viewModel = DataContext as MainViewModel;
+            if (viewModel != null)
+                viewModel.Save();
         }
 
         public void Browse()

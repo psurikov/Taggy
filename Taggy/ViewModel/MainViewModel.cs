@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using Taggy.Model;
 
@@ -15,6 +16,7 @@ namespace Taggy.ViewModel
         private TagCloudViewModel tagCloud = new TagCloudViewModel();
         private ObservableCollection<FileReference> fileReferences = new ObservableCollection<FileReference>();        
         private ObservableCollection<FileReference> fileReferencesForSelectedTags = new ObservableCollection<FileReference>();
+        private ObservableCollection<Resource> resources = new ObservableCollection<Resource>();
 
         #endregion
 
@@ -102,9 +104,40 @@ namespace Taggy.ViewModel
             }
         }
 
+        public ObservableCollection<Resource> Resources
+        {
+            get { return resources; }
+            set
+            {
+                if (resources == value)
+                    return;
+                resources = value;
+                OnPropertyChanged(nameof(Resources));
+            }
+        }
+
         #endregion
 
         #region Actions
+
+        public void Load()
+        {
+            var resourceConfigFilePath = GetResourceConfigFilePath();
+            if (File.Exists(resourceConfigFilePath))
+            {
+                var resourceConfig = new ResourceConfig();
+                resourceConfig.LoadFile(resourceConfigFilePath);
+                Resources = new ObservableCollection<Resource>(resourceConfig.Resources);
+            }
+        }
+
+        public void Save()
+        {
+            var resourceConfigFilePath = GetResourceConfigFilePath();
+            var resourceConfig = new ResourceConfig();
+            resourceConfig.Resources = Resources;
+            resourceConfig.Save(resourceConfigFilePath);
+        }
 
         public void Reindex()
         {
@@ -121,6 +154,11 @@ namespace Taggy.ViewModel
                 tagCloudItem.Weight = concatenatedTags.Count(t => t == tag);
                 tagCloud.Items.Add(tagCloudItem);
             }
+        }
+
+        private static string GetResourceConfigFilePath()
+        {
+            return "Resources.xml";
         }
 
         #endregion

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Xml;
 
 namespace Taggy.Model
@@ -12,6 +14,16 @@ namespace Taggy.Model
         public ResourceConfig()
         {
             xmlDocument = new XmlDocument();
+        }
+
+        public void LoadFile(string filePath)
+        {
+            xmlDocument.Load(filePath);
+        }
+
+        public void LoadXml(string xml)
+        {
+            xmlDocument.LoadXml(xml);
         }
 
         public IEnumerable<Resource> Resources
@@ -53,6 +65,16 @@ namespace Taggy.Model
             xmlDocument.Save(filePath);
         }
 
+        public void Save(StringBuilder stringBuilder)
+        {
+            var memoryStream = new MemoryStream();
+            xmlDocument.Save(memoryStream);
+            var bytes = memoryStream.ToArray();
+            var encoding = Encoding.UTF8;
+            var str = encoding.GetString(bytes);
+            stringBuilder.AppendLine(str);
+        }
+
         private static XmlNode AddNode(XmlNode parentNode, string name)
         {
             return AddNode(parentNode, name, "");
@@ -61,6 +83,8 @@ namespace Taggy.Model
         private static XmlNode AddNode(XmlNode parentNode, string name, string value)
         {
             var ownerDocument = parentNode.OwnerDocument;
+            if (ownerDocument == null)
+                ownerDocument = parentNode as XmlDocument;
             if (ownerDocument == null)
                 throw new Exception("The node does not specify the owner document.");
             var element = ownerDocument.CreateElement(name);

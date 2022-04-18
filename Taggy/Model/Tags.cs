@@ -28,6 +28,14 @@ namespace Taggy.Model
             return matching.First();
         }
 
+        public string? GetValue(string name)
+        {
+            var matching = items.Where(tag => tag.Name == name);
+            if (matching.Any() == false)
+                return null;
+            return matching.First().Value;
+        }
+
         public override string ToString()
         {
             var stringRepresentation = string.Join(", ", items);
