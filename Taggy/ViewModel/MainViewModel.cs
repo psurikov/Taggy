@@ -36,7 +36,7 @@ namespace Taggy.ViewModel
             {
                 if (location == value)
                     return;
-                location = value; 
+                location = value;
                 OnPropertyChanged(nameof(Location));
             }
         }
@@ -120,14 +120,14 @@ namespace Taggy.ViewModel
         }
 
         private void UpdateTags()
-		{
+        {
             this.tagCloudView.Items.Clear();
             var tags = resources.SelectMany(r => r.Tags.Items);
             var distinctTags = tags.Distinct().OrderBy(t => t.Category + "%" + t.Value);
             var tagCloudItems = new List<TagCloudItemViewModel>();
 
             foreach (var distinctTag in distinctTags)
-			{
+            {
                 var tagCloudItem = new TagCloudItemViewModel();
                 tagCloudItem.Tag = distinctTag;
                 tagCloudItem.Weight = tags.Count(t => t == distinctTag);
