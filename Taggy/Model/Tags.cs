@@ -12,9 +12,9 @@ namespace Taggy.Model
 
         public List<Tag> Items { get => items; set => items = value; }
 
-        public Tag? GetTagByName(string name)
+        public Tag? GetTagByCategory(string category)
         {
-            var matching = items.Where(tag => tag.Name == name);
+            var matching = items.Where(tag => tag.Category == category);
             if (matching.Any() == false)
                 return null;
             return matching.First();
@@ -28,9 +28,9 @@ namespace Taggy.Model
             return matching.First();
         }
 
-        public string? GetValue(string name)
+        public string? GetValue(string category)
         {
-            var matching = items.Where(tag => tag.Name == name);
+            var matching = items.Where(tag => tag.Category == category);
             if (matching.Any() == false)
                 return null;
             return matching.First().Value;

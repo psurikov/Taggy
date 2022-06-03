@@ -18,8 +18,8 @@ namespace Taggy.Tests.Model
         public void ConvertFromString_Items()
         {
             var tags = TagsConverter.FromString("name @(author=roger, year=1986, biology, mathematics)");
-            Assert.IsTrue(tags.GetTagByName("author")?.Value == "roger");
-            Assert.IsTrue(tags.GetTagByName("year")?.Value == "1986");
+            Assert.IsTrue(tags.GetTagByCategory("author")?.Value == "roger");
+            Assert.IsTrue(tags.GetTagByCategory("year")?.Value == "1986");
             Assert.IsTrue(tags.GetTagByValue("biology") != null);
             Assert.IsTrue(tags.GetTagByValue("mathematics") != null);
         }

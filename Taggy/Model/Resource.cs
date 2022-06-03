@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace Taggy.Model
 {
@@ -6,11 +7,13 @@ namespace Taggy.Model
     {
         private string location;
         private Tags tags;
+        private DateTime dateAdded;
 
-        public Resource(string location, Tags tags)
+        public Resource(string location, Tags tags, DateTime dateAdded)
         {
             this.location = location;
             this.tags = tags;
+            this.dateAdded = dateAdded;
         }
 
         public string Location
@@ -37,14 +40,24 @@ namespace Taggy.Model
             }
         }
 
+        public DateTime DateAdded
+        {
+            get { return dateAdded; }
+            set
+            {
+                if (dateAdded.Equals(value))
+                    return;
+                dateAdded = value;
+                OnPropertyChanged(nameof(DateAdded));
+            }
+        }
+
         #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {
-            var handler = PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion

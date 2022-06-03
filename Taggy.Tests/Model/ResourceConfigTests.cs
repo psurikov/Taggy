@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using Taggy.Model;
 
@@ -40,7 +39,7 @@ namespace Taggy.Tests.Model
         {
             var tags = new Tags();
             tags.Items.Add(new Tag("Name", "Value"));
-            var resource1 = new Resource("http://host", tags);
+            var resource1 = new Resource("http://host", tags, new DateTime(2050, 12, 23));
             var resources = new List<Resource>();
             resources.Add(resource1);
             var resourceConfig = new ResourceConfig();
@@ -54,6 +53,7 @@ namespace Taggy.Tests.Model
 
             Assert.IsTrue(xmlDocument.SelectSingleNode("Resources/Resource/Location")?.InnerText == "http://host");
             Assert.IsTrue(xmlDocument.SelectSingleNode("Resources/Resource/Tags")?.InnerText == "@(Name=Value)");
+            Assert.IsTrue(xmlDocument.SelectSingleNode("Resources/Resource/DateAdded")?.InnerText == new DateTime(2050, 12, 23).Ticks.ToString());
         }
     }
 }

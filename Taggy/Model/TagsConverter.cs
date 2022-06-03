@@ -42,8 +42,8 @@ namespace Taggy.Model
         {
             static string TagToString(Tag tag)
             {
-                if (!string.IsNullOrWhiteSpace(tag.Name))
-                    return tag.Name + "=" + tag.Value;
+                if (!string.IsNullOrWhiteSpace(tag.Category))
+                    return tag.Category + "=" + tag.Value;
                 return tag.Value;
             }
 

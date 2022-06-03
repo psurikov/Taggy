@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -11,12 +13,8 @@ namespace Taggy.ViewModel
         #region Fields
 
         private string location;
-        private ObservableCollection<Tag> tags = new ObservableCollection<Tag>();
-        private Tag selectedTag;
-        private TagCloudViewModel tagCloud = new TagCloudViewModel();
-        private ObservableCollection<FileReference> fileReferences = new ObservableCollection<FileReference>();        
-        private ObservableCollection<FileReference> fileReferencesForSelectedTags = new ObservableCollection<FileReference>();
-        private ObservableCollection<Resource> resources = new ObservableCollection<Resource>();
+        private TagCloudViewModel tagCloudView = new();
+        private ObservableCollection<Resource> resources = new();
 
         #endregion
 
@@ -43,64 +41,15 @@ namespace Taggy.ViewModel
             }
         }
 
-        public ObservableCollection<Tag> Tags
+        public TagCloudViewModel TagCloudView
         {
-            get { return tags; }
-            set 
-            {
-                if (tags == value)
-                    return;
-                tags = value;
-                OnPropertyChanged(nameof(Tags));
-            }
-        }
-
-        public Tag SelectedTag
-        {
-            get { return selectedTag; }
+            get { return tagCloudView; }
             set
             {
-                if (selectedTag == value)
+                if (tagCloudView == value)
                     return;
-                selectedTag = value;
-                OnPropertyChanged(nameof(SelectedTag));
-            }
-        }
-
-        public TagCloudViewModel TagCloud
-        {
-            get { return tagCloud; }
-            set
-            {
-                if (tagCloud == value)
-                    return;
-                tagCloud = value;
-                OnPropertyChanged(nameof(TagCloud));
-            }
-        }
-
-        public ObservableCollection<FileReference> FileReferences
-        {
-            get { return fileReferences; }
-            set
-            {
-                if (fileReferences == value)
-                    return;
-                fileReferences = value;
-                OnPropertyChanged(nameof(FileReferences));
-                UpdateFileReferencesForSelectedTag();
-            }
-        }
-
-        public ObservableCollection<FileReference> FileReferencesForSelectedTags
-        {
-            get { return fileReferencesForSelectedTags; }
-            set
-            {
-                if (fileReferencesForSelectedTags == value)
-                    return;
-                fileReferencesForSelectedTags = value;
-                OnPropertyChanged(nameof(FileReferencesForSelectedTags));
+                tagCloudView = value;
+                OnPropertyChanged(nameof(TagCloudView));
             }
         }
 
@@ -129,6 +78,15 @@ namespace Taggy.ViewModel
                 resourceConfig.LoadFile(resourceConfigFilePath);
                 Resources = new ObservableCollection<Resource>(resourceConfig.Resources);
             }
+
+            /* temp */
+            if (resources.Count == 0)
+            {
+                resources.Add(new Resource("http://localhost", new Tags() { Items = new List<Tag>() { new Tag("TestResource"), new Tag("Simple") } }, DateTime.Now));
+                resources.Add(new Resource("http://youtube", new Tags() { Items = new List<Tag>() { new Tag("TestResource"), new Tag("VideoStorage") } }, DateTime.Now));
+            }
+
+            UpdateTags();
         }
 
         public void Save()
@@ -141,11 +99,11 @@ namespace Taggy.ViewModel
 
         public void Reindex()
         {
-            var fileReferences = FileReferenceBrowser.Browse(Location);
+            /*var fileReferences = FileReferenceBrowser.Browse(Location);
             this.FileReferences = new ObservableCollection<FileReference>(fileReferences);
 
             var concatenatedTags = fileReferences.SelectMany(f => f.TagCluster.Items);
-            var distinctTags = concatenatedTags.Distinct().OrderBy(t => t.Name + "#" + t.Value);
+            var distinctTags = concatenatedTags.Distinct().OrderBy(t => t.Category + "#" + t.Value);
             Tags = new ObservableCollection<Tag>(distinctTags);
             foreach(var tag in tags)
             {
@@ -153,7 +111,7 @@ namespace Taggy.ViewModel
                 tagCloudItem.Tag = tag;
                 tagCloudItem.Weight = concatenatedTags.Count(t => t == tag);
                 tagCloud.Items.Add(tagCloudItem);
-            }
+            }*/
         }
 
         private static string GetResourceConfigFilePath()
@@ -161,14 +119,28 @@ namespace Taggy.ViewModel
             return "Resources.xml";
         }
 
+        private void UpdateTags()
+		{
+            this.tagCloudView.Items.Clear();
+            var tags = resources.SelectMany(r => r.Tags.Items);
+            var distinctTags = tags.Distinct().OrderBy(t => t.Category + "%" + t.Value);
+            var tagCloudItems = new List<TagCloudItemViewModel>();
+
+            foreach (var distinctTag in distinctTags)
+			{
+                var tagCloudItem = new TagCloudItemViewModel();
+                tagCloudItem.Tag = distinctTag;
+                tagCloudItem.Weight = tags.Count(t => t == distinctTag);
+                tagCloudItems.Add(tagCloudItem);
+            }
+
+            var weightedItems = tagCloudItems.OrderByDescending(i => i.Weight);
+            this.tagCloudView.Items = new ObservableCollection<TagCloudItemViewModel>(weightedItems);
+        }
+
         #endregion
 
         #region Other Methods
-
-        private void UpdateFileReferencesForSelectedTag()
-        {
-            FileReferencesForSelectedTags = new ObservableCollection<FileReference>(FileReferences);
-        }
 
         #endregion
 

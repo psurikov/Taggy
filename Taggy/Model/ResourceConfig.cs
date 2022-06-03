@@ -9,7 +9,7 @@ namespace Taggy.Model
 {
     public class ResourceConfig
     {
-        private XmlDocument xmlDocument;
+        private readonly XmlDocument xmlDocument;
 
         public ResourceConfig()
         {
@@ -40,7 +40,8 @@ namespace Taggy.Model
                 {
                     var location = GetValue(resourceNode, "Location") ?? "";
                     var tagsString = GetValue(resourceNode, "Tags") ?? "";
-                    var resource = new Resource(location, TagsConverter.FromString(tagsString));
+                    var dateAdded = new DateTime(Convert.ToInt32(GetValue(resourceNode, "DateAdded")));
+                    var resource = new Resource(location, TagsConverter.FromString(tagsString), dateAdded);
                     resources.Add(resource);
                 }
 
@@ -56,6 +57,7 @@ namespace Taggy.Model
                     var resourceNode = AddNode(rootNode, "Resource");
                     AddNode(resourceNode, "Location", resource.Location);
                     AddNode(resourceNode, "Tags", TagsConverter.ToString(resource.Tags));
+                    AddNode(resourceNode, "DateAdded", resource.DateAdded.Ticks.ToString());
                 }
             }
         }

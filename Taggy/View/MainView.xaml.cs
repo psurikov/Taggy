@@ -31,15 +31,13 @@ namespace Taggy.View
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            var viewModel = DataContext as MainViewModel;
-            if (viewModel != null)
+            if (DataContext is MainViewModel viewModel)
                 viewModel.Load();
         }
 
         private void OnClosing(object? sender, System.ComponentModel.CancelEventArgs e)
         {
-            var viewModel = DataContext as MainViewModel;
-            if (viewModel != null)
+            if (DataContext is MainViewModel viewModel)
                 viewModel.Save();
         }
 
@@ -50,9 +48,8 @@ namespace Taggy.View
 
         public void Reindex()
         {
-            var dataContext = DataContext as MainViewModel;
-            if (dataContext != null)
-                dataContext.Reindex();
+            if (DataContext is MainViewModel viewModel)
+                viewModel.Reindex();
         }
 
         private void OnReindex(object sender, RoutedEventArgs e)

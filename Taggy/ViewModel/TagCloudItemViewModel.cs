@@ -56,11 +56,11 @@ namespace Taggy.ViewModel
             }
         }
 
-        #endregion
+		#endregion
 
-        #region INotifyPropertyChanged
+		#region INotifyPropertyChanged
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged(string property)
         {
             var handler = PropertyChanged;

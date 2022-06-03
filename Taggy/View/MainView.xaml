@@ -12,6 +12,12 @@
         Width="1024">
     <view:LayoutPanel Orientation="Vertical" Interval="0">
         <view:LayoutPanel>
+            <view:LayoutPanel Orientation="Horizontal">
+                <Button Content="Add resource"></Button>
+                <Button Content="Remove resource"></Button>
+            </view:LayoutPanel>
+        </view:LayoutPanel>
+        <view:LayoutPanel>
             <Label Content="Select a directory with files that you want to browse:" Style="{StaticResource DescriptionLabel}"></Label>
         </view:LayoutPanel>
         <view:LayoutPanel Orientation="Horizontal">
@@ -35,7 +41,7 @@
                     <Label Content="Tags" Style="{StaticResource DescriptionLabel}"></Label>
                 </GroupBox.Header>
                 <GroupBox.Content>
-                    <view:TagCloudView DataContext="{Binding TagCloud}"/>
+                    <view:TagCloudView DataContext="{Binding TagCloudView}"/>
                 </GroupBox.Content>
             </GroupBox>
             <GroupBox Grid.Column="2" Grid.Row="0" Style="{StaticResource GroupBoxStyle}">
@@ -44,10 +50,11 @@
                 </GroupBox.Header>
                 <GroupBox.Content>
                     <Border Background="Crimson">
-                        <DataGrid ItemsSource="{Binding FileReferencesForSelectedTags}" AutoGenerateColumns="False" Style="{StaticResource DataGridStyle}" RowHeaderWidth="0">
+                        <DataGrid ItemsSource="{Binding Resources}" AutoGenerateColumns="False" Style="{StaticResource DataGridStyle}" RowHeaderWidth="0">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding FilePathUntagged}" Header="File location (no tags)"/>
-                                <DataGridTextColumn Binding="{Binding TagCluster}" Header="Tags"/>
+                                <DataGridTextColumn Binding="{Binding Location}" Header="Location"/>
+                                <DataGridTextColumn Binding="{Binding Tags}" Header="Tags"/>
+                                <DataGridTextColumn Binding="{Binding DateAdded}" Header="Added"></DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Border>
