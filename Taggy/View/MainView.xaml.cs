@@ -56,5 +56,17 @@ namespace Taggy.View
         {
             Reindex();
         }
-    }
+
+		private void AddResourcesButtonClick(object sender, RoutedEventArgs e)
+		{
+            if (DataContext is MainViewModel viewModel)
+                viewModel.AddResources();
+		}
+
+		private void RemoveResourcesButtonClick(object sender, RoutedEventArgs e)
+		{
+            if (DataContext is MainViewModel viewModel)
+                viewModel.RemoveResources();
+		}
+	}
 }

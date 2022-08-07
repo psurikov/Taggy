@@ -12,7 +12,6 @@ namespace Taggy.ViewModel
     {
         #region Fields
 
-        private string location;
         private TagCloudViewModel tagCloudView = new();
         private ObservableCollection<Resource> resources = new();
 
@@ -22,24 +21,11 @@ namespace Taggy.ViewModel
 
         public MainViewModel()
         {
-            Location = "S:\\Books";
         }
 
         #endregion
 
         #region Properties
-
-        public string Location
-        {
-            get { return location; }
-            set
-            {
-                if (location == value)
-                    return;
-                location = value;
-                OnPropertyChanged(nameof(Location));
-            }
-        }
 
         public TagCloudViewModel TagCloudView
         {
@@ -68,6 +54,16 @@ namespace Taggy.ViewModel
         #endregion
 
         #region Actions
+
+        public void AddResources()
+		{
+
+		}
+
+        public void RemoveResources()
+		{
+
+		}
 
         public void Load()
         {
@@ -123,14 +119,14 @@ namespace Taggy.ViewModel
         {
             this.tagCloudView.Items.Clear();
             var tags = resources.SelectMany(r => r.Tags.Items);
-            var distinctTags = tags.Distinct().OrderBy(t => t.Category + "%" + t.Value);
+            var tagsGrouped = tags.GroupBy(t => t.Category + "*" + t.Name); 
             var tagCloudItems = new List<TagCloudItemViewModel>();
 
-            foreach (var distinctTag in distinctTags)
+            foreach (var tagsGroup in tagsGrouped)
             {
                 var tagCloudItem = new TagCloudItemViewModel();
-                tagCloudItem.Tag = distinctTag;
-                tagCloudItem.Weight = tags.Count(t => t == distinctTag);
+                tagCloudItem.Tag = new Tag(tagsGroup.First().Category, tagsGroup.First().Name);
+                tagCloudItem.Weight = tags.Count();
                 tagCloudItems.Add(tagCloudItem);
             }
 

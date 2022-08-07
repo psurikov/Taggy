@@ -13,7 +13,7 @@ namespace Taggy.ViewModel
 
         public TagCloudItemViewModel()
         {
-            Tag = new Tag();
+            tag = new Tag();
         }
 
         #endregion

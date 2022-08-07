@@ -16,9 +16,9 @@ namespace Taggy.Model
             foreach (var file in files)
             {
                 var fileName = Path.GetFileName(file);
-                var tagCluster = TagsConverter.FromString(fileName);
-                if (tagCluster != null && tagCluster.Items.Count > 0)
-                    fileReferences.Add(new FileReference(file, tagCluster));                
+                var tags = TagsConverter.FromString(fileName);
+                if (tags != null && tags.Items.Count > 0)
+                    fileReferences.Add(new FileReference(file, tags));                
             }
 
             return fileReferences;
@@ -33,4 +33,16 @@ namespace Taggy.Model
             return files;
         }
     }
+
+    public class FileReference
+	{
+        public FileReference(string filePath, Tags tags)
+		{
+            this.FilePath = filePath;
+            this.Tags = tags;
+		}
+
+        public string FilePath { get; set; }
+        public Tags Tags { get; set; }
+	}
 }

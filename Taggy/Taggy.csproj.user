@@ -2,6 +2,12 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="View\ResourceRemovalDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ResourcesAdditionDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\TagCloudItemView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -11,6 +17,12 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="View\MainView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ResourceRemovalDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ResourcesAdditionDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Styles\GroupBoxStyles.xaml">

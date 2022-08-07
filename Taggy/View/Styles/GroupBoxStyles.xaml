@@ -5,16 +5,19 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="GroupBox">
-                    <Border BorderThickness="1" BorderBrush="Blue">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <ContentPresenter Grid.Row="0" ContentSource="Header"></ContentPresenter>
-                            <ContentPresenter Grid.Row="1"></ContentPresenter>
-                        </Grid>
-                    </Border>
+                    <Grid>
+                        <!--<Border BorderThickness="1" BorderBrush="LightGray" Margin="-1"></Border>-->
+                        <Border BorderThickness="1" BorderBrush="#fff0f0f0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <ContentPresenter Grid.Row="0" ContentSource="Header"></ContentPresenter>
+                                <ContentPresenter Grid.Row="1" Margin="0"></ContentPresenter>
+                            </Grid>
+                        </Border>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

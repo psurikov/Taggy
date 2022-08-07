@@ -43,8 +43,8 @@ namespace Taggy.Model
             static string TagToString(Tag tag)
             {
                 if (!string.IsNullOrWhiteSpace(tag.Category))
-                    return tag.Category + "=" + tag.Value;
-                return tag.Value;
+                    return tag.Category + "=" + tag.Name;
+                return tag.Name;
             }
 
             return string.Format("@({0})", string.Join(",", tags.Items.Select(TagToString)));

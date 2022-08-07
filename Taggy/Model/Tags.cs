@@ -22,7 +22,7 @@ namespace Taggy.Model
 
         public Tag? GetTagByValue(string value)
         {
-            var matching = items.Where(tag => tag.Value == value);
+            var matching = items.Where(tag => tag.Name == value);
             if (matching.Any() == false)
                 return null;
             return matching.First();
@@ -33,7 +33,7 @@ namespace Taggy.Model
             var matching = items.Where(tag => tag.Category == category);
             if (matching.Any() == false)
                 return null;
-            return matching.First().Value;
+            return matching.First().Name;
         }
 
         public override string ToString()

@@ -21,7 +21,7 @@
                 </LinearGradientBrush>
             </Border.BorderBrush>
             <StackPanel Orientation="Horizontal" Margin="5,3,5,3">
-                <TextBlock Text="{Binding Tag.Value}"></TextBlock>
+                <TextBlock Text="{Binding Tag.Name}"></TextBlock>
                 <TextBlock Text="{Binding Weight}"></TextBlock>
             </StackPanel>
         </Border>

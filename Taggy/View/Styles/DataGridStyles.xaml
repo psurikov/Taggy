@@ -368,7 +368,7 @@
         </Style.Triggers>
     </Style>
     <!-- Text Column Style -->
-    <Style x:Key="DataGridTextColumnSyle" TargetType="{x:Type DataGridTextColumn}">
+    <Style x:Key="DataGridTextColumnStyle" TargetType="{x:Type DataGridTextColumn}">
         <Setter Property="Width" Value="*"/>
         <Setter Property="ElementStyle" Value="{StaticResource CellElementStyle}"/>
         <Setter Property="EditingElementStyle" Value="{StaticResource CellEditingStyle}"/>

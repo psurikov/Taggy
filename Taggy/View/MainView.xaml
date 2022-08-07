@@ -11,55 +11,56 @@
         Height="768"
         Width="1024">
     <view:LayoutPanel Orientation="Vertical" Interval="0">
-        <view:LayoutPanel>
-            <view:LayoutPanel Orientation="Horizontal">
-                <Button Content="Add resource"></Button>
-                <Button Content="Remove resource"></Button>
+        <view:LayoutPanel Orientation="Vertical" view:LayoutPanel.LayoutMode="Stretch" Margin="5">
+            <!-- Buttons -->
+            <view:LayoutPanel>
+                <view:LayoutPanel Orientation="Horizontal">
+                    <Button Content="Add resources" Style="{StaticResource OperationButton}" Click="AddResourcesButtonClick"></Button>
+                    <Button Content="Remove resources" Style="{StaticResource OperationButton}" Click="RemoveResourcesButtonClick"></Button>
+                </view:LayoutPanel>
             </view:LayoutPanel>
+            <!-- Content -->
+            <Grid view:LayoutPanel.LayoutMode="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <GridSplitter Grid.Column="1" Grid.Row="0" Width="{StaticResource SplitterWidth}" HorizontalAlignment="Stretch" Background="{StaticResource SplitterBackground}"></GridSplitter>
+                <GroupBox Grid.Column="0" Grid.Row="0" Style="{StaticResource GroupBoxStyle}">
+                    <GroupBox.Header>
+                        <Label Content="Tags" Style="{StaticResource DescriptionLabel}"/>
+                    </GroupBox.Header>
+                    <GroupBox.Content>
+                        <view:TagCloudView DataContext="{Binding TagCloudView}" Margin="5"/>
+                    </GroupBox.Content>
+                </GroupBox>
+                <GroupBox Grid.Column="2" Grid.Row="0" Style="{StaticResource GroupBoxStyle}">
+                    <GroupBox.Header>
+                        <Label Content="Files" Style="{StaticResource DescriptionLabel}"/>
+                    </GroupBox.Header>
+                    <GroupBox.Content>
+                        <Border Margin="-1,5,-1,-1">
+                            <DataGrid ItemsSource="{Binding Resources}" AutoGenerateColumns="False" Style="{StaticResource DataGridStyle}" RowHeaderWidth="0">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding Location}" Header="Location"/>
+                                    <DataGridTextColumn Binding="{Binding Tags}" Header="Tags"/>
+                                    <DataGridTextColumn Binding="{Binding DateAdded}" Header="Added"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Border>
+                    </GroupBox.Content>
+                </GroupBox>
+            </Grid>
         </view:LayoutPanel>
-        <view:LayoutPanel>
-            <Label Content="Select a directory with files that you want to browse:" Style="{StaticResource DescriptionLabel}"></Label>
-        </view:LayoutPanel>
-        <view:LayoutPanel Orientation="Horizontal">
-            <Label Content="Location:" VerticalAlignment="Center" Style="{StaticResource DescriptionLabel}"></Label>
-            <TextBox view:LayoutPanel.LayoutMode="Stretch" VerticalAlignment="Center" Text="{Binding Location}"></TextBox>
-            <Button Content="Browse" Style="{StaticResource OperationButton}" VerticalAlignment="Center"></Button>
-            <Button Content="Reindex" Style="{StaticResource OperationButton}" VerticalAlignment="Center" Click="OnReindex"></Button>
-        </view:LayoutPanel>
-        <Grid view:LayoutPanel.LayoutMode="Stretch">
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <GridSplitter Grid.Column="1" Grid.Row="0" Width="{StaticResource SplitterWidth}" HorizontalAlignment="Stretch" Background="{StaticResource SplitterBackground}"></GridSplitter>
-            <GroupBox Grid.Column="0" Grid.Row="0" Style="{StaticResource GroupBoxStyle}">
-                <GroupBox.Header>
-                    <Label Content="Tags" Style="{StaticResource DescriptionLabel}"></Label>
-                </GroupBox.Header>
-                <GroupBox.Content>
-                    <view:TagCloudView DataContext="{Binding TagCloudView}"/>
-                </GroupBox.Content>
-            </GroupBox>
-            <GroupBox Grid.Column="2" Grid.Row="0" Style="{StaticResource GroupBoxStyle}">
-                <GroupBox.Header>
-                    <Label Content="Files" Style="{StaticResource DescriptionLabel}"></Label>
-                </GroupBox.Header>
-                <GroupBox.Content>
-                    <Border Background="Crimson">
-                        <DataGrid ItemsSource="{Binding Resources}" AutoGenerateColumns="False" Style="{StaticResource DataGridStyle}" RowHeaderWidth="0">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding Location}" Header="Location"/>
-                                <DataGridTextColumn Binding="{Binding Tags}" Header="Tags"/>
-                                <DataGridTextColumn Binding="{Binding DateAdded}" Header="Added"></DataGridTextColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Border>
-                </GroupBox.Content>
-            </GroupBox>
-        </Grid>
+        <!-- Status -->
+        <StatusBar>
+            <StatusBarItem>
+                <TextBlock Text="Items: 0"></TextBlock>
+            </StatusBarItem>
+        </StatusBar>
     </view:LayoutPanel>
 </Window>
