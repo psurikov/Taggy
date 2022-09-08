@@ -15,32 +15,32 @@ using Taggy.ViewModel;
 
 namespace Taggy.View
 {
-	/// <summary>
-	/// Interaction logic for ResourcesAdditionDialog.xaml
-	/// </summary>
-	public partial class ResourcesAdditionDialog : Window
-	{
-		public ResourcesAdditionDialog()
-		{
-			InitializeComponent();
-			var tagCloud = new TagCloudViewModel();
-			TagsCloud.DataContext = tagCloud;
-			tagCloud.Items = new System.Collections.ObjectModel.ObservableCollection<TagCloudItemViewModel>();
-			tagCloud.Items.Add(new TagCloudItemViewModel() { Tag = new Model.Tag("Physics") });
-			tagCloud.Items.Add(new TagCloudItemViewModel() { Tag = new Model.Tag("Math") });
-			tagCloud.Items.Add(new TagCloudItemViewModel() { Tag = new Model.Tag("Networking") });
-		}
+    /// <summary>
+    /// Interaction logic for ResourcesAdditionDialog.xaml
+    /// </summary>
+    public partial class ResourcesAdditionDialog : Window
+    {
+        public ResourcesAdditionDialog()
+        {
+            InitializeComponent();
+            var tagCloud = new TagCloudViewModel();
+            TagsCloud.DataContext = tagCloud;
+            tagCloud.Items = new System.Collections.ObjectModel.ObservableCollection<TagCloudItemViewModel>();
+            tagCloud.Items.Add(new TagCloudItemViewModel() { Tag = new Model.Tag("Physics") });
+            tagCloud.Items.Add(new TagCloudItemViewModel() { Tag = new Model.Tag("Math") });
+            tagCloud.Items.Add(new TagCloudItemViewModel() { Tag = new Model.Tag("Networking") });
+        }
 
         private void OnOkButtonClick(object sender, RoutedEventArgs e)
         {
-			DialogResult = true;
-			Close();
+            DialogResult = true;
+            Close();
         }
 
         private void OnCancelButtonClick(object sender, RoutedEventArgs e)
         {
-			//DialogResult = false;
-			Close();
+            //DialogResult = false;
+            Close();
         }
     }
 }
