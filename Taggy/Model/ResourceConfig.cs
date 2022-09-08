@@ -40,7 +40,7 @@ namespace Taggy.Model
                 {
                     var location = GetValue(resourceNode, "Location") ?? "";
                     var tagsString = GetValue(resourceNode, "Tags") ?? "";
-                    var dateAdded = new DateTime(Convert.ToInt32(GetValue(resourceNode, "DateAdded")));
+                    var dateAdded = new DateTime(Convert.ToInt64(GetValue(resourceNode, "DateAdded")));
                     var resource = new Resource(location, TagsConverter.FromString(tagsString), dateAdded);
                     resources.Add(resource);
                 }

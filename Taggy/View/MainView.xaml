@@ -44,7 +44,7 @@
                     </GroupBox.Header>
                     <GroupBox.Content>
                         <Border Margin="-1,5,-1,-1">
-                            <DataGrid ItemsSource="{Binding Resources}" AutoGenerateColumns="False" Style="{StaticResource DataGridStyle}" RowHeaderWidth="0">
+                            <DataGrid x:Name="ResourcesDataGrid" ItemsSource="{Binding Resources}" AutoGenerateColumns="False" Style="{StaticResource DataGridStyle}" RowHeaderWidth="0">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Binding="{Binding Location}" Header="Location"/>
                                     <DataGridTextColumn Binding="{Binding Tags}" Header="Tags"/>

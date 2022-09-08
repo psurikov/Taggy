@@ -5,9 +5,38 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:Taggy.View"
+    xmlns:view="clr-namespace:Taggy.View"
     mc:Ignorable="d"
-    Title="Add resources" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    WindowStartupLocation="CenterOwner"
+    UseLayoutRounding="True"
+    Title="Add resources"
+    Height="450"
+    Width="600">
+    <view:LayoutPanel Orientation="Vertical" Margin="10">
+        <Grid view:LayoutPanel.LayoutMode="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Content="Location:" Grid.Column="0" Grid.Row="0" Style="{StaticResource FieldLabel}" HorizontalAlignment="Right"/>
+            <TextBox Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Style="{StaticResource TextBoxStyle}"/>
+            <Label Content="Tags:" Grid.Column="0" Grid.Row="2" Style="{StaticResource FieldLabel}" HorizontalAlignment="Right"/>
+            <TextBox Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Style="{StaticResource TextBoxStyle}"/>
+            <TextBlock Text="Format: (category1=value1,category2=value2,value3,value4)" Grid.Column="1" Grid.Row="3" Foreground="Gray"></TextBlock>
+            <Label Grid.Row="5" Grid.Column="0" Content="Recommended tags:" VerticalAlignment="Top" Style="{StaticResource FieldLabel}"></Label>
+            <view:TagCloudView Grid.Row="5" Grid.Column="1" BorderThickness="1" BorderBrush="#fff1f1f1" Padding="5" x:Name="TagsCloud"/>
+        </Grid>
+        <view:LayoutPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="OK" Style="{StaticResource OperationButton}" MinWidth="70" x:Name="OkButton" Click="OnOkButtonClick"/>
+            <Button Content="Cancel" Style="{StaticResource OperationButton}" MinWidth="70" x:Name="CancelButton" Click="OnCancelButtonClick"/>
+        </view:LayoutPanel>
+    </view:LayoutPanel>
 </Window>

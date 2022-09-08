@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Taggy.Model;
 using Taggy.ViewModel;
 
 namespace Taggy.View
@@ -59,14 +60,29 @@ namespace Taggy.View
 
 		private void AddResourcesButtonClick(object sender, RoutedEventArgs e)
 		{
-            if (DataContext is MainViewModel viewModel)
-                viewModel.AddResources();
+            var dialog = new ResourcesAdditionDialog();
+            dialog.Owner = this;
+            if (dialog.ShowDialog() == true)
+            {
+                if (DataContext is MainViewModel viewModel)
+                    viewModel.AddResources();
+            }
 		}
 
 		private void RemoveResourcesButtonClick(object sender, RoutedEventArgs e)
 		{
             if (DataContext is MainViewModel viewModel)
-                viewModel.RemoveResources();
+                viewModel.RemoveResources(SelectedResources);
 		}
-	}
+
+        private IEnumerable<Resource> SelectedResources
+        {
+            get
+            {
+                var selectedItems = ResourcesDataGrid.SelectedItems;
+                var selectedValues = selectedItems.OfType<Resource>();
+                return selectedValues;
+            }
+        }
+    }
 }

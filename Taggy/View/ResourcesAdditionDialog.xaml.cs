@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Taggy.ViewModel;
 
 namespace Taggy.View
 {
@@ -22,6 +23,24 @@ namespace Taggy.View
 		public ResourcesAdditionDialog()
 		{
 			InitializeComponent();
+			var tagCloud = new TagCloudViewModel();
+			TagsCloud.DataContext = tagCloud;
+			tagCloud.Items = new System.Collections.ObjectModel.ObservableCollection<TagCloudItemViewModel>();
+			tagCloud.Items.Add(new TagCloudItemViewModel() { Tag = new Model.Tag("Physics") });
+			tagCloud.Items.Add(new TagCloudItemViewModel() { Tag = new Model.Tag("Math") });
+			tagCloud.Items.Add(new TagCloudItemViewModel() { Tag = new Model.Tag("Networking") });
 		}
-	}
+
+        private void OnOkButtonClick(object sender, RoutedEventArgs e)
+        {
+			DialogResult = true;
+			Close();
+        }
+
+        private void OnCancelButtonClick(object sender, RoutedEventArgs e)
+        {
+			//DialogResult = false;
+			Close();
+        }
+    }
 }

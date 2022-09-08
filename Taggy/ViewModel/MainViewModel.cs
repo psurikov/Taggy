@@ -60,9 +60,11 @@ namespace Taggy.ViewModel
 
 		}
 
-        public void RemoveResources()
+        public void RemoveResources(IEnumerable<Resource> removedResources)
 		{
-
+            var removedResourcesCollectionCopy = removedResources.ToList();
+            foreach (var resource in removedResourcesCollectionCopy)
+                this.resources.Remove(resource);
 		}
 
         public void Load()
