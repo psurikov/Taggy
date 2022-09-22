@@ -56,17 +56,17 @@ namespace Taggy.ViewModel
         #region Actions
 
         public void AddResources(IEnumerable<Resource> addedResources)
-		{
+        {
             foreach (var resource in addedResources)
                 this.resources.Add(resource);
-		}
+        }
 
         public void RemoveResources(IEnumerable<Resource> removedResources)
-		{
+        {
             var removedResourcesCollectionCopy = removedResources.ToList();
             foreach (var resource in removedResourcesCollectionCopy)
                 this.resources.Remove(resource);
-		}
+        }
 
         public void Load()
         {
@@ -122,7 +122,7 @@ namespace Taggy.ViewModel
         {
             tagSelection.Items.Clear();
             var tags = resources.SelectMany(r => r.Tags.Items);
-            var tagGroupes = tags.GroupBy(t => t.Category + "*" + t.Name); 
+            var tagGroupes = tags.GroupBy(t => t.Category + "*" + t.Name);
             var tagElements = new List<TagSelectionElementViewModel>();
             var maxCount = (float)tagGroupes.Max(g => g.Count());
 
@@ -130,7 +130,7 @@ namespace Taggy.ViewModel
             {
                 var tagElement = new TagSelectionElementViewModel();
                 tagElement.Tag = new Tag(tagGroup.First().Category, tagGroup.First().Name);
-                tagElement.Weight = 1 + (tagGroup.Count() - 1) / (float) maxCount;
+                tagElement.Weight = 1 + (tagGroup.Count() - 1) / (float)maxCount;
                 tagElements.Add(tagElement);
             }
 
