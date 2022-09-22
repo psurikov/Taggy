@@ -5,24 +5,24 @@ using System.Linq;
 
 namespace Taggy.ViewModel
 {
-    public class TagCloudViewModel : INotifyPropertyChanged
+    public class TagSelectionViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<TagCloudItemViewModel> items;
-        private ObservableCollection<TagCloudItemViewModel> selectedItems;
+        private ObservableCollection<TagSelectionElementViewModel> items;
+        private ObservableCollection<TagSelectionElementViewModel> selectedItems;
 
         #region Constructors
 
-        public TagCloudViewModel()
+        public TagSelectionViewModel()
         {
-            items = new ObservableCollection<TagCloudItemViewModel>();
-            selectedItems = new ObservableCollection<TagCloudItemViewModel>();
+            items = new ObservableCollection<TagSelectionElementViewModel>();
+            selectedItems = new ObservableCollection<TagSelectionElementViewModel>();
         }
 
         #endregion
 
         #region Properties
 
-        public ObservableCollection<TagCloudItemViewModel> Items
+        public ObservableCollection<TagSelectionElementViewModel> Items
         {
             get { return items; }
             set
@@ -34,7 +34,7 @@ namespace Taggy.ViewModel
             }
         }
 
-        public ObservableCollection<TagCloudItemViewModel> SelectedItems
+        public ObservableCollection<TagSelectionElementViewModel> SelectedItems
         {
             get { return selectedItems; }
             set

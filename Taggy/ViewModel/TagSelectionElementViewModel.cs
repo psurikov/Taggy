@@ -3,15 +3,15 @@ using Taggy.Model;
 
 namespace Taggy.ViewModel
 {
-    public class TagCloudItemViewModel : INotifyPropertyChanged
+    public class TagSelectionElementViewModel : INotifyPropertyChanged
     {
         private Tag tag;
-        private int weight;
+        private float weight;
         private bool isSelected;
 
         #region Constructors
 
-        public TagCloudItemViewModel()
+        public TagSelectionElementViewModel()
         {
             tag = new Tag();
         }
@@ -32,7 +32,7 @@ namespace Taggy.ViewModel
             }
         }
 
-        public int Weight
+        public float Weight
         {
             get { return weight; }
             set

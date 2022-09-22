@@ -1,5 +1,5 @@
 ﻿<Window
-    x:Class="Taggy.View.ResourcesAdditionDialog"
+    x:Class="Taggy.View.ResourceAdditionDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,7 +11,8 @@
     UseLayoutRounding="True"
     Title="Add resources"
     Height="450"
-    Width="600">
+    Width="600"
+    Name="MainControl">
     <view:LayoutPanel Orientation="Vertical" Margin="10">
         <Grid view:LayoutPanel.LayoutMode="Stretch">
             <Grid.ColumnDefinitions>
@@ -27,12 +28,12 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Label Content="Location:" Grid.Column="0" Grid.Row="0" Style="{StaticResource FieldLabel}" HorizontalAlignment="Right"/>
-            <TextBox Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Style="{StaticResource TextBoxStyle}"/>
+            <TextBox Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Style="{StaticResource TextBoxStyle}" Text="{Binding Location, ElementName=MainControl, UpdateSourceTrigger=PropertyChanged}"/>
             <Label Content="Tags:" Grid.Column="0" Grid.Row="2" Style="{StaticResource FieldLabel}" HorizontalAlignment="Right"/>
-            <TextBox Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Style="{StaticResource TextBoxStyle}"/>
+            <TextBox Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Style="{StaticResource TextBoxStyle}" Text="{Binding TagsString, ElementName=MainControl, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Format: (category1=value1,category2=value2,value3,value4)" Grid.Column="1" Grid.Row="3" Foreground="Gray"></TextBlock>
             <Label Grid.Row="5" Grid.Column="0" Content="Recommended tags:" VerticalAlignment="Top" Style="{StaticResource FieldLabel}"></Label>
-            <view:TagCloudView Grid.Row="5" Grid.Column="1" BorderThickness="1" BorderBrush="#fff1f1f1" Padding="5" x:Name="TagsCloud"/>
+            <view:TagSelectionView Grid.Row="5" Grid.Column="1" BorderThickness="1" BorderBrush="#fff1f1f1" Padding="5" x:Name="TagSelectionControl" DataContext="{Binding TagSelection}"/>
         </Grid>
         <view:LayoutPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="OK" Style="{StaticResource OperationButton}" MinWidth="70" x:Name="OkButton" Click="OnOkButtonClick"/>

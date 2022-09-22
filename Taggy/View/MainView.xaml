@@ -16,6 +16,7 @@
             <view:LayoutPanel>
                 <view:LayoutPanel Orientation="Horizontal">
                     <Button Content="Add resources" Style="{StaticResource OperationButton}" Click="AddResourcesButtonClick"></Button>
+                    <Button Content="Edit resources" Style="{StaticResource OperationButton}" Click="EditResourcesButtonClick"></Button>
                     <Button Content="Remove resources" Style="{StaticResource OperationButton}" Click="RemoveResourcesButtonClick"></Button>
                 </view:LayoutPanel>
             </view:LayoutPanel>
@@ -35,7 +36,7 @@
                         <Label Content="Tags" Style="{StaticResource DescriptionLabel}"/>
                     </GroupBox.Header>
                     <GroupBox.Content>
-                        <view:TagCloudView DataContext="{Binding TagCloudView}" Margin="5"/>
+                        <view:TagSelectionView DataContext="{Binding TagSelection}" Margin="5"/>
                     </GroupBox.Content>
                 </GroupBox>
                 <GroupBox Grid.Column="2" Grid.Row="0" Style="{StaticResource GroupBoxStyle}">

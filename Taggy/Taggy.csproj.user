@@ -5,13 +5,13 @@
     <Compile Update="View\ResourceRemovalDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\ResourcesAdditionDialog.xaml.cs">
+    <Compile Update="View\ResourceAdditionDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\TagCloudItemView.xaml.cs">
+    <Compile Update="View\TagSelectionElementView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\TagCloudView.xaml.cs">
+    <Compile Update="View\TagSelectionView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -22,7 +22,7 @@
     <Page Update="View\ResourceRemovalDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\ResourcesAdditionDialog.xaml">
+    <Page Update="View\ResourceAdditionDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Styles\GroupBoxStyles.xaml">
@@ -31,10 +31,10 @@
     <Page Update="View\Styles\OtherStyles.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\TagCloudItemView.xaml">
+    <Page Update="View\TagSelectionElementView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\TagCloudView.xaml">
+    <Page Update="View\TagSelectionView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

@@ -16,12 +16,9 @@ using Taggy.ViewModel;
 
 namespace Taggy.View
 {
-    /// <summary>
-    /// Interaction logic for TagCloudView.xaml
-    /// </summary>
-    public partial class TagCloudView : UserControl
+    public partial class TagSelectionView : UserControl
     {
-        public TagCloudView()
+        public TagSelectionView()
         {
             InitializeComponent();
         }

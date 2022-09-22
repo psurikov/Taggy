@@ -5,10 +5,10 @@ namespace Taggy.Model
 {
     public class TagsConverter
     {
-        public static Tags FromString(string location)
+        public static Tags FromString(string tagsString)
         {
             var regex = "@\\((?<tags>.*)\\)";
-            var match = Regex.Match(location, regex);
+            var match = Regex.Match(tagsString, regex);
             if (match.Success)
             {
                 var tags = new Tags();

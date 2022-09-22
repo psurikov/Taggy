@@ -12,7 +12,7 @@ namespace Taggy.ViewModel
     {
         #region Fields
 
-        private TagCloudViewModel tagCloudView = new();
+        private TagSelectionViewModel tagSelection = new();
         private ObservableCollection<Resource> resources = new();
 
         #endregion
@@ -27,15 +27,15 @@ namespace Taggy.ViewModel
 
         #region Properties
 
-        public TagCloudViewModel TagCloudView
+        public TagSelectionViewModel TagSelection
         {
-            get { return tagCloudView; }
+            get { return tagSelection; }
             set
             {
-                if (tagCloudView == value)
+                if (tagSelection == value)
                     return;
-                tagCloudView = value;
-                OnPropertyChanged(nameof(TagCloudView));
+                tagSelection = value;
+                OnPropertyChanged(nameof(TagSelection));
             }
         }
 
@@ -55,9 +55,10 @@ namespace Taggy.ViewModel
 
         #region Actions
 
-        public void AddResources()
+        public void AddResources(IEnumerable<Resource> addedResources)
 		{
-
+            foreach (var resource in addedResources)
+                this.resources.Add(resource);
 		}
 
         public void RemoveResources(IEnumerable<Resource> removedResources)
@@ -119,21 +120,22 @@ namespace Taggy.ViewModel
 
         private void UpdateTags()
         {
-            this.tagCloudView.Items.Clear();
+            tagSelection.Items.Clear();
             var tags = resources.SelectMany(r => r.Tags.Items);
-            var tagsGrouped = tags.GroupBy(t => t.Category + "*" + t.Name); 
-            var tagCloudItems = new List<TagCloudItemViewModel>();
+            var tagGroupes = tags.GroupBy(t => t.Category + "*" + t.Name); 
+            var tagElements = new List<TagSelectionElementViewModel>();
+            var maxCount = (float)tagGroupes.Max(g => g.Count());
 
-            foreach (var tagsGroup in tagsGrouped)
+            foreach (var tagGroup in tagGroupes)
             {
-                var tagCloudItem = new TagCloudItemViewModel();
-                tagCloudItem.Tag = new Tag(tagsGroup.First().Category, tagsGroup.First().Name);
-                tagCloudItem.Weight = tags.Count();
-                tagCloudItems.Add(tagCloudItem);
+                var tagElement = new TagSelectionElementViewModel();
+                tagElement.Tag = new Tag(tagGroup.First().Category, tagGroup.First().Name);
+                tagElement.Weight = 1 + (tagGroup.Count() - 1) / (float) maxCount;
+                tagElements.Add(tagElement);
             }
 
-            var weightedItems = tagCloudItems.OrderByDescending(i => i.Weight);
-            this.tagCloudView.Items = new ObservableCollection<TagCloudItemViewModel>(weightedItems);
+            var weightedElements = tagElements.OrderByDescending(i => i.Weight);
+            tagSelection.Items = new ObservableCollection<TagSelectionElementViewModel>(weightedElements);
         }
 
         #endregion

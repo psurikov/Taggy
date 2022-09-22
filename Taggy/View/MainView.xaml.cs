@@ -1,17 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Taggy.Model;
 using Taggy.ViewModel;
 
@@ -60,14 +50,35 @@ namespace Taggy.View
 
 		private void AddResourcesButtonClick(object sender, RoutedEventArgs e)
 		{
-            var dialog = new ResourcesAdditionDialog();
+            var dialog = new ResourceAdditionDialog();
             dialog.Owner = this;
             if (dialog.ShowDialog() == true)
             {
+                var result = dialog.Result;
+                var resources = new List<Resource>();
+                resources.Add(result);
                 if (DataContext is MainViewModel viewModel)
-                    viewModel.AddResources();
+                    viewModel.AddResources(resources);
             }
 		}
+
+        private void EditResourcesButtonClick(object sender, RoutedEventArgs e)
+        {
+            var mainViewModel = DataContext as MainViewModel;
+            if (mainViewModel != null)
+            {
+                var selectedResources = mainViewModel.Resources;
+                var locations = selectedResources.Select(r => r.Location);
+                var tags = selectedResources.Select(r => r.Tags);
+                var dialog = new ResourceAdditionDialog();
+                dialog.Owner = this;
+                dialog.Location = locations.FirstOrDefault() ?? string.Empty;
+                if (dialog.ShowDialog() == true)
+                {
+
+                }
+            }
+        }
 
 		private void RemoveResourcesButtonClick(object sender, RoutedEventArgs e)
 		{
