@@ -32,6 +32,8 @@ namespace Taggy.View
             tagSelection.Items.Add(new TagSelectionElementViewModel() { Tag = new Tag("Physics") });
             tagSelection.Items.Add(new TagSelectionElementViewModel() { Tag = new Tag("Math") });
             tagSelection.Items.Add(new TagSelectionElementViewModel() { Tag = new Tag("Networking") });
+            location = string.Empty;
+            tagsString = string.Empty;
         }
 
         #region Properties
@@ -58,6 +60,12 @@ namespace Taggy.View
                 tagsString = value;
                 OnPropertyChanged(nameof(TagsString));
             }
+        }
+
+        public Tags Tags
+        {
+            get { return TagsConverter.FromString(TagsString); }
+            set { TagsString = TagsConverter.ToString(value); }
         }
 
         public TagSelectionViewModel TagSelection

@@ -37,17 +37,6 @@ namespace Taggy.View
             // create folder browser dialog
         }
 
-        public void Reindex()
-        {
-            if (DataContext is MainViewModel viewModel)
-                viewModel.Reindex();
-        }
-
-        private void OnReindex(object sender, RoutedEventArgs e)
-        {
-            Reindex();
-        }
-
 		private void AddResourcesButtonClick(object sender, RoutedEventArgs e)
 		{
             var dialog = new ResourceAdditionDialog();
@@ -57,33 +46,43 @@ namespace Taggy.View
                 var result = dialog.Result;
                 var resources = new List<Resource>();
                 resources.Add(result);
-                if (DataContext is MainViewModel viewModel)
-                    viewModel.AddResources(resources);
+                var mainViewModel = DataContext as MainViewModel;
+                if (mainViewModel != null)
+                    mainViewModel.AddResources(resources);
             }
 		}
 
         private void EditResourcesButtonClick(object sender, RoutedEventArgs e)
         {
-            var mainViewModel = DataContext as MainViewModel;
-            if (mainViewModel != null)
-            {
-                var selectedResources = mainViewModel.Resources;
-                var locations = selectedResources.Select(r => r.Location);
-                var tags = selectedResources.Select(r => r.Tags);
-                var dialog = new ResourceAdditionDialog();
-                dialog.Owner = this;
-                dialog.Location = locations.FirstOrDefault() ?? string.Empty;
-                if (dialog.ShowDialog() == true)
-                {
+            var selectedResources = SelectedResources;
 
-                }
+            var location = string.Empty;
+            var locations = selectedResources.Select(r => r.Location).Distinct().ToList();
+            if (locations.Count == 1)
+                location = locations.First();
+
+            var tags = new Tags();
+            var tagsCollections = selectedResources.Select(r => r.Tags).ToList();
+            if (tagsCollections.Count == 1)
+                tags = tagsCollections.First();
+
+            var dialog = new ResourceAdditionDialog();
+            dialog.Owner = this;
+            dialog.Location = location;
+            dialog.Tags = tags;
+            if (dialog.ShowDialog() == true)
+            {
+                var mainViewModel = DataContext as MainViewModel;
+                if (mainViewModel != null)
+                    mainViewModel.EditResources(selectedResources, dialog.Result);
             }
         }
 
 		private void RemoveResourcesButtonClick(object sender, RoutedEventArgs e)
 		{
-            if (DataContext is MainViewModel viewModel)
-                viewModel.RemoveResources(SelectedResources);
+            var mainViewModel = DataContext as MainViewModel;
+            if (mainViewModel != null)
+                mainViewModel.RemoveResources(SelectedResources);
 		}
 
         private IEnumerable<Resource> SelectedResources

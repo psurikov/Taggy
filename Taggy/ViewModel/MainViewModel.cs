@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -61,6 +60,17 @@ namespace Taggy.ViewModel
                 this.resources.Add(resource);
         }
 
+        public void EditResources(IEnumerable<Resource> editedResources, Resource example)
+        {
+            foreach (var editedResource in editedResources)
+            {
+                if (string.IsNullOrWhiteSpace(example.Location) == false)
+                    editedResource.Location = example.Location;
+                if (example.Tags.Items.Any())
+                    editedResource.Tags = example.Tags;
+            }
+        }
+
         public void RemoveResources(IEnumerable<Resource> removedResources)
         {
             var removedResourcesCollectionCopy = removedResources.ToList();
@@ -78,13 +88,6 @@ namespace Taggy.ViewModel
                 Resources = new ObservableCollection<Resource>(resourceConfig.Resources);
             }
 
-            /* temp */
-            if (resources.Count == 0)
-            {
-                resources.Add(new Resource("http://localhost", new Tags() { Items = new List<Tag>() { new Tag("TestResource"), new Tag("Simple") } }, DateTime.Now));
-                resources.Add(new Resource("http://youtube", new Tags() { Items = new List<Tag>() { new Tag("TestResource"), new Tag("VideoStorage") } }, DateTime.Now));
-            }
-
             UpdateTags();
         }
 
@@ -94,23 +97,6 @@ namespace Taggy.ViewModel
             var resourceConfig = new ResourceConfig();
             resourceConfig.Resources = Resources;
             resourceConfig.Save(resourceConfigFilePath);
-        }
-
-        public void Reindex()
-        {
-            /*var fileReferences = FileReferenceBrowser.Browse(Location);
-            this.FileReferences = new ObservableCollection<FileReference>(fileReferences);
-
-            var concatenatedTags = fileReferences.SelectMany(f => f.TagCluster.Items);
-            var distinctTags = concatenatedTags.Distinct().OrderBy(t => t.Category + "#" + t.Value);
-            Tags = new ObservableCollection<Tag>(distinctTags);
-            foreach(var tag in tags)
-            {
-                var tagCloudItem = new TagCloudItemViewModel();
-                tagCloudItem.Tag = tag;
-                tagCloudItem.Weight = concatenatedTags.Count(t => t == tag);
-                tagCloud.Items.Add(tagCloudItem);
-            }*/
         }
 
         private static string GetResourceConfigFilePath()
