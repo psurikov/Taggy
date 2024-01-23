@@ -33,9 +33,9 @@ namespace Taggy.View
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is float valueFactor)
+            if (value is double valueFactor)
             {
-                return defaultFontSize * valueFactor;
+                return defaultFontSize * (1 + valueFactor);
             }
 
             return defaultFontSize;

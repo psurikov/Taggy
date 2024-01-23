@@ -14,7 +14,6 @@ namespace Taggy.Model
     {
         private string category = "";
         private string name = "";
-        private double relevant = 1d;
 
         public Tag()
         {
@@ -36,7 +35,6 @@ namespace Taggy.Model
 
         public string Category { get => category; set => category = value; }
         public string Name { get => name; set => this.name = value; }
-        public double Relevant { get => relevant; set => relevant = value; }
 
         public override string ToString()
         {

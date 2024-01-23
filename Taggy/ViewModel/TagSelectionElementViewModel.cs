@@ -6,7 +6,7 @@ namespace Taggy.ViewModel
     public class TagSelectionElementViewModel : INotifyPropertyChanged
     {
         private Tag tag;
-        private float weight;
+        private double weight;
         private bool isSelected;
 
         #region Constructors
@@ -32,7 +32,7 @@ namespace Taggy.ViewModel
             }
         }
 
-        public float Weight
+        public double Weight
         {
             get { return weight; }
             set

@@ -4,11 +4,11 @@ using System.Linq;
 namespace Taggy.Model
 {
     /// <summary>
-    /// A cluster or set of tags.
+    /// A list of tags.
     /// </summary>
     public class Tags
     {
-        private List<Tag> items = new List<Tag>();
+        private List<Tag> items = new();
 
         public List<Tag> Items { get => items; set => items = value; }
 
