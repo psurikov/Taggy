@@ -21,13 +21,13 @@ namespace Taggy.Model
                     {
                         var name = tagsPair.Substring(0, index).Trim();
                         var value = tagsPair.Substring(index + 1).Trim();
-                        var tag = new Tag(name, value);
+                        var tag = TagCache.GetTag(name, value);
                         tags.Items.Add(tag);
                     }
                     else
                     {
                         var value = tagsPair.Trim();
-                        var tag = new Tag(value);
+                        var tag = TagCache.GetTag(value);
                         tags.Items.Add(tag);
                     }
                 }

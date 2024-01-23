@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -106,22 +107,24 @@ namespace Taggy.ViewModel
 
         private void UpdateTags()
         {
-            tagSelection.Items.Clear();
+            /*tagCloud.Clear();
             var tags = resources.SelectMany(r => r.Tags.Items);
-            var tagGroupes = tags.GroupBy(t => t.Category + "*" + t.Name);
-            var tagElements = new List<TagSelectionElementViewModel>();
-            var maxCount = (float)tagGroupes.Max(g => g.Count());
+            foreach (var tag in tags)
+                tagCloud.AddTag(tag);
 
-            foreach (var tagGroup in tagGroupes)
+            tagSelection.Items.Clear();
+                        
+            var tagElements = new List<TagSelectionElementViewModel>();
+            foreach (var tag in tagCloud.GetTags())
             {
                 var tagElement = new TagSelectionElementViewModel();
-                tagElement.Tag = new Tag(tagGroup.First().Category, tagGroup.First().Name);
-                tagElement.Weight = 1 + (tagGroup.Count() - 1) / (float)maxCount;
+                tagElement.Tag = tag;
+                tagElement.Weight = tagCloud.GetTagWeight(tag);
                 tagElements.Add(tagElement);
             }
 
             var weightedElements = tagElements.OrderByDescending(i => i.Weight);
-            tagSelection.Items = new ObservableCollection<TagSelectionElementViewModel>(weightedElements);
+            tagSelection.Items = new ObservableCollection<TagSelectionElementViewModel>(weightedElements);*/
         }
 
         #endregion

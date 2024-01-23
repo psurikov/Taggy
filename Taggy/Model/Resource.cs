@@ -52,6 +52,11 @@ namespace Taggy.Model
             }
         }
 
+        public string TagsString
+        {
+            get { return tags.ToString(); }
+        }
+
         #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler? PropertyChanged;
